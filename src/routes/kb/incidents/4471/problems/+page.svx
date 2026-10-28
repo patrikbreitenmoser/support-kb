@@ -1,0 +1,57 @@
+---
+layout: runbook
+title: '#4471 · three problems, not one'
+owner: Patrik Breitenmoser
+status: open
+reviewed: 2026-10-28
+signature: Patrik Breitenmoser
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+[#4471](/kb/incidents/4471) is marked known: one bug, one fix queued. The reports in it say
+otherwise. Read by tenant and channel, the way `causes.ts` already sorts them, and not by
+subject line or intake tag, they fall into three problems. The queued fix closes only the first.
+
+<Callout kind="warn">
+Each problem has its own ticket below. Merging them back into #4471 hides two bugs behind one fix.
+</Callout>
+
+## What #4471 holds
+
+<ProblemTable ticket={4471} repo="patrikbreitenmoser/support-kb" />
+
+## The three problems
+
+**`parser`: the shared parser reads every date month first.** Day-first tenants (en-GB, nl-NL,
+de-DE and the rest) book 3 October and get an invite for 10 March. This is what #4471 says, and
+the queued fix is for this.
+
+**`hint`: booking-v3 prints `MM/DD/YYYY` under its date field.** Tenants on booking-v3 write
+the day first. Their people type what the hint tells them, month first, and the form reads it
+the tenant's way. Fixing the parser does not fix this: the hint has to match the tenant's locale.
+
+**`one-day`: the date moves by exactly one day.** Tuesday becomes Monday, every booking in June is
+off by a day, a client in Lisbon and one in Toronto get different days for one meeting, an invite
+arrives before the booking. Day and month are not swapped. This looks like a time zone or
+daylight saving conversion. The desk noted these reports as one-day moves (`desk-notes.json`), but
+`causes.ts` has no cause for them, so they were filed under `parser` by tenant.
+
+## Why it was merged as one
+
+- Duplicates were merged by subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)).
+  Every report about a wrong date has a similar subject, whatever caused it.
+- The intake tag is a guess from the reporter's browser. It disagrees with the tenant for many
+  reports, so counting by tag gives the wrong split.
+- The export comes in overlapping pages: some reports appear twice. Count by id.
+
+## For the desk
+
+- Before merging into a big ticket, check the cause by tenant and channel, not the subject.
+- When a report does not fit a known cause, give it its own ticket, even if it is the only one.
+
+<RenderStamp {signature} />
