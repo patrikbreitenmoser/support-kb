@@ -38,7 +38,7 @@ Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
 ## #4471, split
 
 `src/routes/kb/incidents/4471/problems/+page.svx` (signed, desk ref `DR-8TAV-WQAS`) splits #4471
-into three problems, one issue each in this repo: #1 parser (374 reports), #2 booking-v3 hint (33),
+into three problems, one issue each in this repo: #1 parser (379 reports, desk view; includes the 5 of #3), #2 booking-v3 hint (33),
 #3 one-day shift (5). Logic: `src/lib/kb/problems.ts`, table: `src/lib/kb/ProblemTable.svelte`.
 
 The page as the desk sees it: `build/kb/incidents/4471/problems.html` (`npm install && npm run build`).

@@ -17,17 +17,16 @@
 
 <table>
   <thead>
-    <tr><th>problem</th><th>reports</th><th>tenants</th><th>seen</th><th>intake agreed</th><th>ticket</th></tr>
+    <tr><th>problem</th><th>reports</th><th>tenants</th><th>seen</th><th>ticket</th></tr>
   </thead>
   <tbody>
     {#each result.rows as row (row.problem)}
       {@const p = row.problem === 'unplaced' ? null : PROBLEMS[row.problem]}
       <tr>
         <td><code>{row.problem}</code>{#if p}<br /><span class="what">{p.title}</span>{/if}</td>
-        <td>{row.reports}</td>
+        <td>{row.reports}{#if row.filedUnder}<br /><span class="what">counted under <code>{row.filedUnder}</code></span>{/if}</td>
         <td>{row.tenants}</td>
         <td>{row.firstSeen} → {row.lastSeen}</td>
-        <td>{row.intakeAgrees} of {row.reports}</td>
         <td>{#if p}<a href="https://github.com/{repo}/issues/{p.issue}">{repo}#{p.issue}</a>{:else}none{/if}</td>
       </tr>
     {/each}

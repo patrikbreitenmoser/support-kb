@@ -14,7 +14,7 @@ signature: Patrik Breitenmoser
 </script>
 
 [#4471](/kb/incidents/4471) is marked known: one bug, one fix queued. The reports in it say
-otherwise. Read by tenant and channel, the way `causes.ts` already sorts them, and not by
+otherwise. Counted the desk's own way, by tenant and channel as `causes.ts` sorts them, and not by
 subject line or intake tag, they fall into three problems. The queued fix closes only the first.
 
 <Callout kind="warn">
@@ -39,7 +39,8 @@ the tenant's way. Fixing the parser does not fix this: the hint has to match the
 off by a day, a client in Lisbon and one in Toronto get different days for one meeting, an invite
 arrives before the booking. Day and month are not swapped. This looks like a time zone or
 daylight saving conversion. The desk noted these reports as one-day moves (`desk-notes.json`), but
-`causes.ts` has no cause for them, so they were filed under `parser` by tenant.
+`causes.ts` has no cause for them, so they stay counted under `parser` by tenant. They need
+their own fix all the same.
 
 ## Why it was merged as one
 
