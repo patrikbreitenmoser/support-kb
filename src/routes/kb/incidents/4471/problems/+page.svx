@@ -4,7 +4,7 @@ title: '#4471 · three problems, not one'
 owner: Patrik Breitenmoser
 status: open
 reviewed: 2026-10-28
-signature: Patrik Breitenmoser
+signature: v1.eyJzdWIiOiI2ODY4IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMxNzk2NjIsImV4cCI6MTc5MzI2NjA2Mn0.yL0E43Jmdk_5-p9yI6uovVHt_FM9sVDssSwBewmp4QI
 ---
 
 <script>
@@ -24,6 +24,14 @@ Each problem has its own ticket below. Merging them back into #4471 hides two bu
 ## What #4471 holds
 
 <ProblemTable ticket={4471} repo="patrikbreitenmoser/support-kb" />
+
+## Status
+
+Engineering closed #4471 on 5 October:
+
+- `parser`: **fixed** by `fix(dates): parse dd/mm for eu locales`.
+- `hint`: **won't fix**, the booking-v3 form is retired.
+- `one-day`: not in the update. The parser fix does not touch a one-day shift.
 
 ## The three problems
 
